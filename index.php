@@ -1,26 +1,30 @@
 <?php include_once("static/_partials/header.php") ?>
     <title>Chakravyuh</title>
 </head>
-<body class="h-screen flex flex-col bg-blue-darkest">
+<body class="min-h-screen flex flex-col bg-blue-darker">
     <!-- main content starts here -->
         <main class="flex-1 flex items-center">
-            <div class="content flex flex-1">
-                <div class="title-section flex-1 flex flex-col items-center justify-around px-10">
+            <div class="content flex flex-1 flex-wrap md:flex-row">
+                <div class="title-section flex-1 flex flex-col items-center justify-around px-1 sm:px-10">
                     <div class="title-header">
-                        <h1 class="title text-yellow-dark text-5x1 relative my-2 tracking-wide">Chakravyuh</h1>
-                        <p class="font-sans text-center text-white italic">Tagline goes here</p>
+                        <h1 class="title font-display text-yellow-dark text-5xl md:text-8xl relative mt-12 tracking-wide ">Chakravyuh</h1>
+                        <p class="font-sans text-center text-white italic mb-12 md:mb-16">Tagline goes here</p>
                     </div>
-                    <div class="text-lg">
-                        <a href="#" class="fb-login py-3 px-6 font-bold"><i class="fab fa-facebook-f mr-2 font-normal"></i>Login</a>
+                    <div class="text-lg mb-4 sm:mb-6 md:mb-8">
+                        <a href="/home.php" class="fb-login py-3 px-6 font-bold inline-block hover:text-yellow "><i class="fab fa-facebook-f mr-2 font-normal"></i>Login</a>
                     </div>
-                    <div class="social-links text-2xl">
+                    <div class="social-links text-2xl ">
                         <a href="#" class="fb hover:text-indigo-light"><i class="fab fa-facebook-f mx-2"></i></a>
                         <a href="#" class="twitter "><i class="fab fa-twitter mx-2"></i></a>
                     </div>
+                    <div class="links mt-8 mb-12 md:mb-12 text-lg font-bold">
+                        <a href="#" class="mx-4 text-yellow underline">rules</a>
+                        <a href="#" class="mx-4 text-yellow underline">contact</a>
+                    </div>
                 </div>
-                <div class="illustration-section flex-2 flex">
-                    <div class="image text-white">
-                        <svg data-name="Layer 1" version="1.1" viewBox="0 0 989.05 989.27" xmlns="http://www.w3.org/2000/svg">
+                <div class="illustration-section flex-1 flex justify-center">
+                    <div class="image text-white hidden md:flex items-center">
+                        <svg class="w-normal" data-name="Layer 1" version="1.1" viewBox="0 0 989.05 989.27" xmlns="http://www.w3.org/2000/svg">
                         <title>maze_stroke</title>
                         <g fill="none" stroke="currentColor" stroke-width="10px" stroke-linecap="round" stroke-linejoin="round"> 
                             <path transform="translate(-467.46 -53.44)" d="M1441.43,453.94c7.73,7.41,7.39,18,8.13,26.93,2.67,32.15,6.36,64.16,3.26,96.83-2.72,28.63-6,57-12.56,84.9a477.24,477.24,0,0,1-56.9,139.87A490.74,490.74,0,0,1,1245.79,950a497.67,497.67,0,0,1-168,77,429.69,429.69,0,0,1-60.13,10.37c-13.29,1.38-26.75,3.49-39.81,2.38-20.52-1.74-40.91,2.16-61.36-.55-31.93-4.24-63.81-9.21-94.58-18.61-57.33-17.52-110.46-43.63-158.27-80.35a496.68,496.68,0,0,1-129-147.46c-7.62-13.23-16.12-26.18-20.23-40.94-5.23-18.81-16.77-34.86-21.83-53.7-4.89-18.24-10.45-36.27-13.93-54.88-4.85-26-9.72-52.14-8.12-78.51,1.24-20.51-2.21-40.91.56-61.35,3.79-27.85,8-55.63,15.29-82.78,3.82-14.21,9.18-28,13.81-42,.21-.65-.28-1.7.07-2.1,11.58-12.89,11.08-30.93,19.33-45.21,8.92-15.44,17.75-30.94,26.93-46.23,10.06-16.78,21.88-32.28,34.29-47.43,45-54.91,99-98.52,162.56-130A495.18,495.18,0,0,1,863.74,66.45c32.41-6.68,65.11-8.75,97.94-10.52"/>
@@ -93,10 +97,10 @@
                         </g>
                         </svg>
                     </div>
-                    <div class="event-details flex flex-col items-center justify-around px-8 border-t border-b">
+                    <div class="event-details flex flex-col items-center justify-around p-8  border-t border-b">
                         <div>
-                            <h1 class="text-white my-2">The game begins on</h1>
-                            <h3 class="font-normal text-yellow text-center my-1">21-feb-2019</h3>
+                            <h2 class="text-white my-2 text-center mb-4">The game begins on</h2>
+                            <h3 class="font-semibold text-yellow text-center my-1">21 Febraury, 2019</h3>
                         </div>
                         <div>
                             <h2 class="text-center text-yellow my-4">Countdown</h2>

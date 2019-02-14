@@ -228,6 +228,9 @@ module.exports = {
       'Courier New',
       'monospace',
     ],
+    'display': [
+      'miltonian tattoo',
+    ]
   },
 
 
@@ -261,6 +264,7 @@ module.exports = {
     '3xl': '1.875rem',  // 30px
     '4xl': '2.25rem',   // 36px
     '5xl': '3rem',      // 48px
+    '8xl': '4.5rem',    // 72px
   },
 
 
@@ -509,6 +513,7 @@ module.exports = {
     '5/6': '83.33333%',
     'full': '100%',
     'screen': '100vw',
+    'normal': '360px',
   },
 
 
@@ -893,6 +898,9 @@ module.exports = {
     backgroundRepeat: ['responsive'],
     backgroundSize: ['responsive'],
     borderCollapse: [],
+    border: ['focus'],
+    borderWidth: ['focus'],
+    borderStyle: ['focus'],
     borderColors: ['responsive', 'hover', 'focus'],
     borderRadius: ['responsive'],
     borderStyle: ['responsive'],

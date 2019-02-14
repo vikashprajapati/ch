@@ -502,14 +502,76 @@ table {
   border-collapse: collapse;
 }
 
+.navigation li:hover a {
+  color: #1c3d5a;
+}
+
+@media (max-width: 576px) {
+  .navigation > * {
+    order: 1;
+  }
+
+  .navigation .brand {
+    order: 0;
+  }
+}
+
+.hints i {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.footer-card {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+@media (min-width: 576px) {
+  .footer-card {
+    margin-top: 0;
+    width: 33.33333%;
+  }
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.leaderboard:hover .dropdown-content {
+  display: flex-col;
+}
+
+table .row-head {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  text-align: center;
+}
+
+table .row-data {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  text-align: center;
+}
+
+table tr:nth-child(even) {
+  background: rgba(255, 255, 255, .5);
+  color: #1c3d5a;
+}
+
+table tr:nth-child(odd) {
+  background: rgba(255, 255, 255, .7);
+  color: #1c3d59;
+}
+
 a {
   text-decoration: none;
   color: #fff;
-}
-
-.title-section h1 {
-  font-family: "miltonian tattoo";
-  font-size: 72px;
 }
 
 .title-section h1::before {
@@ -518,11 +580,6 @@ a {
   font-size: 20px;
   color: #fff;
   right: 12%;
-  top: 5px;
-}
-
-.illustration-section svg {
-  width: 350px;
 }
 
 .fb-login {
@@ -531,6 +588,12 @@ a {
 
 .social-links .twitter:hover {
   color: #38a1f3;
+}
+
+@media (min-width: 768px) {
+  h1::before {
+    top: 10px;
+  }
 }
 
 .container {
@@ -2952,6 +3015,10 @@ a {
 
 .font-mono {
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+}
+
+.font-display {
+  font-family: miltonian tattoo;
 }
 
 .font-hairline {
@@ -5783,6 +5850,10 @@ a {
   font-size: 3rem;
 }
 
+.text-8xl {
+  font-size: 4.5rem;
+}
+
 .italic {
   font-style: italic;
 }
@@ -6127,6 +6198,10 @@ a {
 
 .w-screen {
   width: 100vw;
+}
+
+.w-normal {
+  width: 360px;
 }
 
 .z-0 {
@@ -8541,6 +8616,10 @@ a {
 
   .sm\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .sm\:font-display {
+    font-family: miltonian tattoo;
   }
 
   .sm\:font-hairline {
@@ -11356,6 +11435,10 @@ a {
     font-size: 3rem;
   }
 
+  .sm\:text-8xl {
+    font-size: 4.5rem;
+  }
+
   .sm\:italic {
     font-style: italic;
   }
@@ -11700,6 +11783,10 @@ a {
 
   .sm\:w-screen {
     width: 100vw;
+  }
+
+  .sm\:w-normal {
+    width: 360px;
   }
 
   .sm\:z-0 {
@@ -14115,6 +14202,10 @@ a {
 
   .md\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .md\:font-display {
+    font-family: miltonian tattoo;
   }
 
   .md\:font-hairline {
@@ -16930,6 +17021,10 @@ a {
     font-size: 3rem;
   }
 
+  .md\:text-8xl {
+    font-size: 4.5rem;
+  }
+
   .md\:italic {
     font-style: italic;
   }
@@ -17274,6 +17369,10 @@ a {
 
   .md\:w-screen {
     width: 100vw;
+  }
+
+  .md\:w-normal {
+    width: 360px;
   }
 
   .md\:z-0 {
@@ -19689,6 +19788,10 @@ a {
 
   .lg\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .lg\:font-display {
+    font-family: miltonian tattoo;
   }
 
   .lg\:font-hairline {
@@ -22504,6 +22607,10 @@ a {
     font-size: 3rem;
   }
 
+  .lg\:text-8xl {
+    font-size: 4.5rem;
+  }
+
   .lg\:italic {
     font-style: italic;
   }
@@ -22848,6 +22955,10 @@ a {
 
   .lg\:w-screen {
     width: 100vw;
+  }
+
+  .lg\:w-normal {
+    width: 360px;
   }
 
   .lg\:z-0 {
@@ -25263,6 +25374,10 @@ a {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  }
+
+  .xl\:font-display {
+    font-family: miltonian tattoo;
   }
 
   .xl\:font-hairline {
@@ -28078,6 +28193,10 @@ a {
     font-size: 3rem;
   }
 
+  .xl\:text-8xl {
+    font-size: 4.5rem;
+  }
+
   .xl\:italic {
     font-style: italic;
   }
@@ -28422,6 +28541,10 @@ a {
 
   .xl\:w-screen {
     width: 100vw;
+  }
+
+  .xl\:w-normal {
+    width: 360px;
   }
 
   .xl\:z-0 {
