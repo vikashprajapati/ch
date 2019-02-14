@@ -1,4 +1,18 @@
 <?php include_once("static/_partials/header.php") ?>
+<?php
+require 'timer.php';
+// print_r($timerData);
+if ($timerData['status'] == 1) {
+    // Event running.
+    require 'checkuserstatus.php';
+    if ($userStatus == null) {
+        // User is logged in and not blocked.
+        header('Location: /home.php');
+    }
+}
+// load configurations
+$conf = parse_ini_file('./../app.ini.php');
+?>
     <title>Chakravyuh</title>
 </head>
 <body class="min-h-screen flex flex-col bg-blue-darker">
@@ -11,7 +25,10 @@
                         <p class="font-sans text-center text-white italic mb-12 md:mb-16">Tagline goes here</p>
                     </div>
                     <div class="text-lg mb-4 sm:mb-6 md:mb-8">
-                        <a href="/home.php" class="fb-login py-3 px-6 font-bold inline-block hover:text-yellow "><i class="fab fa-facebook-f mr-2 font-normal"></i>Login</a>
+                    <div class="alert alert-success collapse" id="login-success" style = "display: none;" role="alert"><strong>Success!</strong> Welcome to the game.</div>
+                        <div class="alert alert-danger collapse" id="login-error" role="alert"></div>
+                        <div class="alert alert-info collapse" id="login-event-info" role="alert"></div>
+                        <a onclick = "loginWithFacebook()" class="fb-login py-3 px-6 font-bold inline-block hover:text-yellow "><i class="fab fa-facebook-f mr-2 font-normal"></i>Login</a>
                     </div>
                     <div class="social-links text-2xl ">
                         <a href="#" class="fb hover:text-indigo-light"><i class="fab fa-facebook-f mx-2"></i></a>
@@ -106,19 +123,19 @@
                             <h2 class="text-center text-yellow my-4">Countdown</h2>
                             <div class="flex timer text-white text-xl">
                                 <div>
-                                    <div class="p-4 border mx-2">02</div>
+                                    <div class="p-4 border mx-2" id = "days"></div>
                                     <p class="text-center my-2 text-xs uppercase">days</p>
                                 </div>
                                 <div>
-                                    <div class="p-4 border mx-2">11</div>
+                                    <div class="p-4 border mx-2" id = "hours"></div>
                                     <p class="text-center my-2 text-xs uppercase">hours</p>
                                 </div>
                                 <div>
-                                    <div class="p-4 border mx-2">45</div>
+                                    <div class="p-4 border mx-2" id = "mins"></div>
                                     <p class="text-center my-2 text-xs uppercase">min</p>
                                 </div>
                                 <div>
-                                    <div class="p-4 border mx-2">11</div>
+                                    <div class="p-4 border mx-2" id = "secs"></div>
                                     <p class="text-center my-2 text-xs uppercase">sec</p>
                                 </div>
                             </div>
@@ -133,4 +150,84 @@
     <?php include_once("static/_partials/footer.php") ?>
     <!-- footer ends here -->
 </body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="js/timer.js"></script>
+    <script>
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        function handleLoginStatus(response) {
+            if (response.status === 'connected') {
+                
+                FB.api('/me?fields=id,name,email,picture{url}', function (response) {
+                    $.ajax({
+                        type: 'POST',
+                        url: 'login.php',
+                        data: 'id=' + response.id + '&name=' + response.name + '&email=' + response.email + '&pictureUrl=' + encodeURIComponent(response.picture.data.url),
+                        success: function (msg) {
+                            if (msg == 1) {
+                                // Success.
+                                
+                                $('#login-success').show(300);
+                                // redirection
+                                setTimeout(function () {
+                                    window.location = 'home.php';
+                                }, 1000);
+                            } else if (msg == 'USER_REG_ERROR' || msg == 'LOGIN_DATA_MISSING') {
+                                $('#login-error').html("<strong>Something went wrong!</strong> Unable to login/register you. Please try again after some time.").show(300);
+                            } else if (msg == 'USER_BLOCKED') {
+                                $('#login-error').html("<strong>Oops!</strong> It seems you're blocked from this event.").show(300);
+                            } else if (msg == 'THE GAME IS ABOUT TO BEGIN. ARE YOU READY?') {
+                                $('#login-event-info').html("Hello, <strong>" + response.name + ".</strong> You've successfully registered for the event. You'll be able to login once the event is running. Stay tuned!").show(300);
+                            } else if (msg == 'THE GAME HAS ENDED') {
+                                $('#login-event-info').html("<strong>The event has ended.</strong> Thank you for playing!").show(300);
+                            } else if (msg == 'ERROR_CONNECTION_FAILURE') {
+                                alert('Oops! It seems there was a connection failure with the server. Please try again after some time.');
+                            } else if (msg == 'USER_REG_CLOSE') {
+                            $('#login-error').html("<strong>Registrations closed!</strong> Thank you for showing interest in the event. We look forward to seeing you next year.").show(300);
+                            }
+                        },
+                        error: function (msg) {
+                            console.log(msg);
+                        }
+                    });
+                });
+
+            } else if (response.status === 'not_authorized') {
+                $('#login-error').html('<strong>Oops!</strong> Please log into the app to continue.').show(300);
+            } else {
+                $('#login-error').html('<strong>Oops!</strong> Please log into Facebook to continue.').show(300);
+            }
+        }
+
+
+        function loginWithFacebook() {
+            FB.login(function (response) {
+                handleLoginStatus(response);
+            }, {
+                scope: 'public_profile, email'
+            });
+        }
+
+        window.fbAsyncInit = function() {
+            // app id for analytics
+            FB.init({
+                appId      : <?php echo "'" . $conf['snishal_appid'] . "'" ?>, 
+                cookie     : true,
+                xfbml      : true,
+                version    : 'v3.2'
+            });
+            
+            FB.AppEvents.logPageView();    
+
+        };    
+
+        console.log('%cStop! You are not as smart as you think', 'color: red; font-size: 30px; font-weight: bold;');
+
+    </script>
 </html>

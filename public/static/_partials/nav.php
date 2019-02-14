@@ -11,7 +11,7 @@
         </div>
         <ul class="right-nav list-reset flex-1 flex justify-start">
             <li class="py-6 px-2 text-center hover:bg-yellow hover:text-blue-darker"><a href="#">Rules</a></li>
-            <li class="py-6 px-2 text-center hover:bg-yellow hover:text-blue-darker"><a href="#">Logout</a></li>
+            <li class="py-6 px-2 text-center hover:bg-yellow hover:text-blue-darker"><a href="logout.php" onclick="return facebookLogout();">Logout</a></li>
         </ul>
     </div>
 </nav>

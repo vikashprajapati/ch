@@ -1,0 +1,38 @@
+{
+    "questions": [{
+            "Qnumber": "1",
+            "Qdata": "hello",
+            "Qtype": "text",
+            "Qanswer": "lol",
+            "Qhints": ["hint1", "hint2"]
+        },
+        {
+            "Qnumber": "2",
+            "Qdata": "./chakraData/myIMAGE.png",
+            "Qtype": "image",
+            "Qanswer": "whatisagodo",
+            "Qhints": ["hint3", "hint4"]
+        },
+        {
+            "Qnumber": "3",
+            "Qdata": "./chakraData/myAUDIO.mp3",
+            "Qtype": "audio",
+            "Qanswer": "ABC",
+            "Qhints": ["hint5"]
+        },
+        {
+            "Qnumber": "4",
+            "Qdata": "./chakraData/myGIF.gif",
+            "Qtype": "image",
+            "Qanswer": "ABC",
+            "Qhints": ["hint5"]
+        },
+        {
+            "Qnumber": "5",
+            "Qdata": "./chakraData/myVIDEOOKOK.mp4",
+            "Qtype": "video",
+            "Qanswer": "Ava",
+            "Qhints": ["hint6"]
+        }
+    ]
+}

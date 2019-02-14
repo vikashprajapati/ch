@@ -1,4 +1,17 @@
 <?php include_once("static/_partials/header.php") ?>
+<?php
+require 'timer.php';
+
+if ($timerData['status'] != 1) {
+    header('Location: index.php');
+}
+
+require 'checkuserstatus.php';
+
+if ($userStatus != null) {
+    header('Location: index.php');
+}
+?>
     <title>Home | Chakravyuh</title>
 </head>
 <body class="min-h-screen flex flex-col bg-blue-darker">
@@ -13,54 +26,45 @@
             </div>
             <div class="question-section flex mb-4 sm:mb-10 flex-col md:flex-row">
                 <div class="question px-2  w-full my-8 md:w-1/2 md:px-8 md:border-r md:py-4">
-                    <h2 class="text-yellow"><i class="fas fa-question mr-4"></i>Question 1:</h2>
-                    <p class="pl-10 my-4 text-white text-lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, veritatis.</p>
+                    <h2 class="text-yellow"><i class="fas fa-question mr-4"></i>Question: <span id="level-number"></span></h2>
                     <div class="image-container flex mt-10 lg:mx-8 flex-wrap  justify-center">
-                        <div class="w-32 h-32 border border-white mt-2 mx-1 flex-no-shrink"></div>
-                        <div class="w-32 h-32 border border-white mt-2 mx-1 flex-no-shrink"></div>
-                        <div class="w-32 h-32 border border-white mt-2 mx-1 flex-no-shrink"></div>
-                        <div class="w-32 h-32 border border-white mt-2 mx-1 flex-no-shrink"></div>
+                        <div id = "ques-image" class="w-32 h-32 border border-white mt-2 mx-1 flex-no-shrink"></div>
                     </div>
                     <div class="flex justify-center">
-                        <form action="#" class="mt-12 pb-4 flex-col md:flex-row items-center">
-                            <input type="text" class="p-2 w-full md:w-64 focus:border focus:border-yellow" placeholder="Enter your answer">
+                        <form class="mt-12 pb-4 flex-col md:flex-row items-center">
+                            <input id = "input-answer" type="text" class="p-2 w-full md:w-64 focus:border focus:border-yellow" placeholder="Enter your answer">
                             <div class="flex justify-center mt-4">
-                                <button type="submit" class="p-2 bg-yellow" value="submit" >submit </button>
-                                <span class="flex items-center text-xl text-white"><i class="fas fa-check-circle mx-4 animated flip"></i>status</span>
+                                <button id = "button-answer" type="button" class="p-2 bg-yellow" onclick="submitAnswer()" value="submit">submit </button>
+                                <span class="flex items-center text-xl text-white"><i id = "status" class="fas mx-4 animated hidden"></i></span>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="hints flex flex-col items-center justify-center  px-8 my-8 md:py-4 w-full md:w-1/2">
-                    <h1 class="text-yellow"><i class="fas fa-shoe-prints mr-4"></i>Hints</h1>
-                    <div class="flex justify-center">
-                        <p class="my-4 text-white w-full text-center md:w-64 italic font-semibold text-lg">"Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, veritatis"</p>
+                    <h1 class="text-yellow"><i class="fas fa-shoe-prints mr-4"></i>Hints<i class="fa fa-refresh mr-4" id="refresh-hints" onclick="getHints()" data-toggle="tooltip" title="Refresh" data-placement="top"></i></h1>
+                    <div id = "hint" class="flex justify-center">
+                        <table class="">
+                            <tbody>
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
             <div class="leaderboard px-16 mb-16">
-                <h1 class="text-yellow my-5">Leaderboard</h1>
-                <div class="w-full flex justify-center overflow-x-auto">
-                    <table class="w-full">
+                <h1 class="text-yellow my-5">Leaderboard<i class="fa fa-refresh" id="refresh-leaderboard" onclick="updateLeaderboard()" data-toggle="tooltip" title="Refresh" data-placement="bottom"></i></h1>
+                <div id = "leaderboard" class="w-full flex justify-center overflow-x-auto">
+                    <table class="table table-hover leaderboardTable table-condensed text-center">
                         <thead>
-                            <tr class="border-blue-darker border-b-2 text-blue-darker">
-                                <th class="row-head">Rank</th>
-                                <th class="row-head">Name</th>
-                                <th class="row-head">Level</th>
-                                <th class="row-head">Points</th>
-                                <th class="row-head">Split Time</th>
+                            <tr>
+                                <th>Rank</th>
+                                <th colspan="2">Player</th>
+                                <th>Level</th>
+                                <th>Points</th>
+                                <th>Split Time</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach(range(1,10) as $i): ?>
-                            <tr>
-                                <td class="row-data">1</td>
-                                <td class="row-data">Alex</td>
-                                <td class="row-data">3</td>
-                                <td class="row-data">34</td>
-                                <td class="row-data">+N/A</td>
-                            </tr>
-                            <?php endforeach ?>
                         </tbody>
                     </table>
                 </div>
@@ -97,4 +101,7 @@
     </div>
     <!-- footer ends here -->
 </body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript" src="js/game.js"></script>
+
 </html>
